@@ -1,32 +1,32 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Any, Optional
+from dataclasses import dataclass
+from typing import Any
 
-import numpy as np
 import numpy.typing as npt
 
 
-@dataclass()
+@dataclass
 class RoiRectangle:
     """
-    A class representing a rectangle.
+    A rectangular region of interest.
+
+    Intervals are half-open: rows [y1, y2) and columns [x1, x2), so y2 and x2
+    are not part of the region.
 
     Args:
-        y1 (int): The y-coordinate of the top-left corner of the rectangle.
-        y2 (int | None): The y-coordinate of the bottom-right corner of the rectangle.
-            If it is None it mean infinit range.
-        x1 (int): The x-coordinate of the top-left corner of the rectangle.
-        x2 (int | None): The x-coordinate of the bottom-right corner of the rectangle.
-            If it is None it mean infinit range.
-        The cropping operation uses half-open intervals [x1, x2) and [y1, y2).
-        This means the coordinates (x2, y2) are not included in the cropped region.
+        y1 (int): First row.
+        y2 (int | None): End row (exclusive). None extends the region to the
+            end of the axis.
+        x1 (int): First column.
+        x2 (int | None): End column (exclusive). None extends the region to
+            the end of the axis.
     """
 
-    y1: int = field(init=True, repr=True)
-    y2: Optional[int] = field(init=True, repr=True)
-    x1: int = field(init=True, repr=True)
-    x2: Optional[int] = field(init=True, repr=True)
+    y1: int
+    y2: int | None
+    x1: int
+    x2: int | None
 
     def __post_init__(self) -> None:
         if self.x2 is not None and self.x2 < self.x1:
@@ -35,22 +35,27 @@ class RoiRectangle:
             raise ValueError("y2 must be >= y1")
 
     @property
-    def width(self) -> Optional[int]:
+    def width(self) -> int | None:
         return None if self.x2 is None else self.x2 - self.x1
 
     @property
-    def height(self) -> Optional[int]:
+    def height(self) -> int | None:
         return None if self.y2 is None else self.y2 - self.y1
 
     @property
-    def center(self) -> Optional[tuple[int, int]]:
+    def center(self) -> tuple[int, int] | None:
         if self.x2 is None or self.y2 is None:
             return None
         return (self.x1 + self.x2) // 2, (self.y1 + self.y2) // 2
 
+    def _anchor(self) -> tuple[int, int]:
+        """center, or with an unbounded axis, the start of that axis."""
+        if self.center is not None:
+            return self.center
+        return self.x1 + (self.width or 0) // 2, self.y1 + (self.height or 0) // 2
+
     def move(self, dx: int, dy: int) -> RoiRectangle:
-        """Move the ROI relative to its current position.
-        """
+        """Return a new ROI shifted by (dx, dy)."""
         return RoiRectangle(
             self.y1 + dy,
             self.y2 + dy if self.y2 is not None else None,
@@ -59,28 +64,16 @@ class RoiRectangle:
         )
 
     def recenter(self, new_center: tuple[int, int]) -> RoiRectangle:
-        x_i, y_i = self.center if self.center else (
-            self.x1 + (self.width or 0) // 2,
-            self.y1 + (self.height or 0) // 2,
-        )
+        """Return a new ROI of the same size centered at new_center (x, y)."""
+        x_i, y_i = self._anchor()
         x_f, y_f = new_center
-        dx, dy = x_f - x_i, y_f - y_i
-
-        return RoiRectangle(
-            y1=self.y1 + dy,
-            y2=self.y2 + dy if self.y2 is not None else None,
-            x1=self.x1 + dx,
-            x2=self.x2 + dx if self.x2 is not None else None,
-        )
+        return self.move(x_f - x_i, y_f - y_i)
 
     def resize(self, new_width: int, new_height: int) -> RoiRectangle:
-        if self.center is None:
-            if self.x2 is None and self.y2 is None:
-                return self
-            cx = self.x1 + (self.width or 0) // 2
-            cy = self.y1 + (self.height or 0) // 2
-        else:
-            cx, cy = self.center
+        """Return a new ROI of the given size around the same center."""
+        if self.x2 is None and self.y2 is None:
+            return self
+        cx, cy = self._anchor()
 
         half_w, half_h = new_width // 2, new_height // 2
         new_x1, new_y1 = cx - half_w, cy - half_h
@@ -94,59 +87,48 @@ class RoiRectangle:
             x2=new_x2 if self.x2 is not None else None,
         )
 
-
-    def to_tuple(self) -> tuple[int, Optional[int], int, Optional[int]]:
-        """
-        Get the coordinates of the ROI.
-        """
+    def to_tuple(self) -> tuple[int, int | None, int, int | None]:
+        """Return the coordinates as (y1, y2, x1, x2)."""
         return self.y1, self.y2, self.x1, self.x2
 
     @property
-    def area(self) -> Optional[int]:
-        """
-        Get the area of the ROI.
-        """
+    def area(self) -> int | None:
+        """Number of pixels in the ROI, or None if an axis is unbounded."""
         if self.width is None or self.height is None:
             return None
         return self.width * self.height
 
     @property
-    def shape(self) -> tuple[Optional[int], Optional[int]]:
-        """
-        get the shape of the ROI.
-        """
+    def shape(self) -> tuple[int | None, int | None]:
+        """(height, width) of the ROI."""
         return (self.height, self.width)
 
     def get_slices(self) -> tuple[slice, slice]:
         """
-        Get the slices for the ROI.
+        Return slices for indexing an image with the ROI.
 
         Returns:
             tuple: Slices for the y and x axes, in that order.
         """
-        return slice(self.y1, self.y2), slice(self.x1,  self.x2)
+        return slice(self.y1, self.y2), slice(self.x1, self.x2)
 
     def slice(self, image: npt.NDArray[Any]) -> npt.NDArray[Any]:
         """
-        Slice the specified region from the last two axes of the image.
+        Select the ROI from the last two axes of the image.
 
         Args:
-            image (np.ndarray): Input image.
+            image (np.ndarray): Input image or stack of images.
 
         Returns:
-            np.ndarray: Sliced region of the image.
+            np.ndarray: A view of the region, not a copy.
         """
         return image[..., self.y1 : self.y2, self.x1 : self.x2]
 
     @classmethod
-    def from_tuple(cls, coords: tuple[int, Optional[int], int, Optional[int]]) -> RoiRectangle:
-        """
-        Create a RoiRectangle instance from a tuple of coordinates.
-        The tuple should contain four integers: (y1, y2, x1, x2).   
-        """
+    def from_tuple(cls, coords: tuple[int, int | None, int, int | None]) -> RoiRectangle:
+        """Create an ROI from a (y1, y2, x1, x2) tuple."""
         y1, y2, x1, x2 = coords
         return cls(y1=y1, y2=y2, x1=x1, x2=x2)
 
 
 RoiRectangle.__module__ = "roi_rectangle"
-
