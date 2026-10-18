@@ -35,3 +35,6 @@ dev = ["pytest>=7"]
 
 [tool.hatch.build.targets.sdist]
 include = ["/roi_rectangle", "/tests", "/README.md", "/CHANGELOG.md", "/CITATION.cff", "/LICENSE"]
+
+[tool.ruff]
+line-length = 100
