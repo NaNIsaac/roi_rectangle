@@ -6,11 +6,13 @@
 
 **A small, typed helper for rectangular regions of interest (ROI) in NumPy images: one dataclass to crop, measure, move, and resize.**
 
+For image-analysis code that passes ROIs around as four loose integers: `RoiRectangle` keeps the
+bounds together and gives you the slice, size, center and shifted or resized copies.
+
 ![An ROI drawn on a sample image, the crop it selects, and the values it reports](https://raw.githubusercontent.com/NaNIsaac/roi_rectangle/main/docs/roi_example.png)
 
-A 100×120 sample image (Gaussian spot plus noise, seed 0). Orange: `roi`; blue: the ROI
-recentered on the brightest pixel of the crop and resized to 20×20. The values on the right are
-the script's own output. Regenerate with `python examples/readme_figure.py` (needs matplotlib).
+A 100×120 sample image (Gaussian spot plus noise). Orange: `roi`; blue: the ROI recentered on
+the brightest pixel of the crop and resized to 20×20. Script: `examples/readme_figure.py`.
 
 ## Install
 
