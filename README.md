@@ -1,7 +1,7 @@
 # roi_rectangle
 
 [![PyPI version](https://img.shields.io/pypi/v/roi-rectangle)](https://pypi.org/project/roi-rectangle/)
-[![Tests](https://github.com/NaNIsaac/roi_rectangle/actions/workflows/tests.yml/badge.svg)](https://github.com/NaNIsaac/roi_rectangle/actions/workflows/tests.yml)
+[![Tests](https://github.com/NaNIsaac/roi_rectangle/actions/workflows/ci.yml/badge.svg)](https://github.com/NaNIsaac/roi_rectangle/actions/workflows/ci.yml)
 [![License](https://img.shields.io/pypi/l/roi-rectangle)](https://github.com/NaNIsaac/roi_rectangle/blob/main/LICENSE)
 
 **A small, typed helper for rectangular regions of interest (ROI) in NumPy images: one dataclass to crop, measure, move, and resize.**
