@@ -38,3 +38,8 @@ include = ["/roi_rectangle", "/tests", "/README.md", "/CHANGELOG.md", "/CITATION
 
 [tool.ruff]
 line-length = 100
+
+# violations present when ruff became mandatory in CI; remove entries as they are fixed
+[tool.ruff.lint.extend-per-file-ignores]
+"docs/conf.py" = ["I001"]
+"tests/test_roi_rectangle.py" = ["C408", "I001"]
