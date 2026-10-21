@@ -20,6 +20,13 @@ the brightest pixel of the crop and resized to 20×20. Script: `examples/readme_
 pip install roi-rectangle
 ```
 
+To check the install without touching your environment (needs [uv](https://docs.astral.sh/uv/)); it exits non-zero if the quickstart values are wrong:
+
+<!-- test -->
+```sh
+uv run --with roi-rectangle python -c "from roi_rectangle import RoiRectangle as R; r = R(y1=30, y2=80, x1=20, x2=70); assert (r.shape, r.center, r.area) == ((50, 50), (45, 55), 2500)"
+```
+
 ## Quickstart
 
 ```python
