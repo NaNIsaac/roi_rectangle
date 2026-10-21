@@ -535,7 +535,10 @@ dev = [
 requires-dist = [{ name = "numpy", specifier = ">=1.21" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=7" }]
+dev = [
+    { name = "pytest", marker = "python_full_version < '3.10'", specifier = ">=7" },
+    { name = "pytest", marker = "python_full_version >= '3.10'", specifier = ">=9.0.3" },
+]
 
 [[package]]
 name = "tomli"
