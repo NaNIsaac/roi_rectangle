@@ -31,7 +31,11 @@ Issues = "https://github.com/NaNIsaac/roi_rectangle/issues"
 Changelog = "https://github.com/NaNIsaac/roi_rectangle/blob/main/CHANGELOG.md"
 
 [dependency-groups]
-dev = ["pytest>=7"]
+dev = [
+    "pytest>=7; python_version < '3.10'",
+    # 9.0.3 fixes the tmpdir handling advisory and needs Python 3.10
+    "pytest>=9.0.3; python_version >= '3.10'",
+]
 
 [tool.hatch.build.targets.sdist]
 include = ["/roi_rectangle", "/tests", "/README.md", "/CHANGELOG.md", "/CITATION.cff", "/LICENSE"]
