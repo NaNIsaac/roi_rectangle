@@ -99,10 +99,13 @@ def test_resize_keeps_unbounded_axis_start():
     assert roi.resize(30, 10) == RoiRectangle(y1=20, y2=None, x1=5, x2=35)
 
 
-@pytest.mark.parametrize("kwargs", [
-    dict(y1=20, y2=10, x1=0, x2=10),
-    dict(y1=0, y2=10, x1=20, x2=10),
-])
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        dict(y1=20, y2=10, x1=0, x2=10),
+        dict(y1=0, y2=10, x1=20, x2=10),
+    ],
+)
 def test_negative_size_raises(kwargs):
     with pytest.raises(ValueError):
         RoiRectangle(**kwargs)

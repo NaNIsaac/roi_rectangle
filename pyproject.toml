@@ -43,3 +43,6 @@ line-length = 100
 [tool.ruff.lint.extend-per-file-ignores]
 "docs/conf.py" = ["I001"]
 "tests/test_roi_rectangle.py" = ["C408", "I001"]
+
+[tool.ruff.lint]
+extend-select = ["I", "UP", "B"]

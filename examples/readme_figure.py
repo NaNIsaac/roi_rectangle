@@ -19,9 +19,7 @@ from roi_rectangle import RoiRectangle
 
 rng = np.random.default_rng(0)
 y, x = np.indices((100, 120))
-image = 100 * np.exp(-((x - 70) ** 2 + (y - 40) ** 2) / 50) + rng.normal(
-    10, 2, (100, 120)
-)
+image = 100 * np.exp(-((x - 70) ** 2 + (y - 40) ** 2) / 50) + rng.normal(10, 2, (100, 120))
 
 roi = RoiRectangle(y1=20, y2=50, x1=40, x2=80)
 crop = roi.slice(image)
@@ -48,9 +46,7 @@ ax_txt = fig.add_axes((0.55, 0.04, 0.44, 0.88))
 ax_img.imshow(image, cmap="gray")
 for r, color in ((roi, "tab:orange"), (moved, "tab:blue")):
     ax_img.add_patch(
-        Rectangle(
-            (r.x1 - 0.5, r.y1 - 0.5), r.width, r.height, fill=False, ec=color, lw=1.5
-        )
+        Rectangle((r.x1 - 0.5, r.y1 - 0.5), r.width, r.height, fill=False, ec=color, lw=1.5)
     )
 ax_img.set_title("image (100, 120)", fontsize=10)
 ax_crop.imshow(crop, cmap="gray")

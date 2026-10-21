@@ -29,14 +29,14 @@ from roi_rectangle import RoiRectangle
 image = np.arange(100 * 120).reshape(100, 120)
 
 roi = RoiRectangle(y1=30, y2=80, x1=20, x2=70)  # rows [30, 80), cols [20, 70)
-print(roi.shape, roi.center, roi.area)          # (50, 50) (45, 55) 2500
+print(roi.shape, roi.center, roi.area)  # (50, 50) (45, 55) 2500
 
-crop = roi.slice(image)                         # same as image[30:80, 20:70]
-print(crop.shape)                               # (50, 50)
+crop = roi.slice(image)  # same as image[30:80, 20:70]
+print(crop.shape)  # (50, 50)
 
-roi2 = roi.recenter((60, 40)).resize(10, 20)    # methods return new ROIs
-print(roi2)                                     # RoiRectangle(y1=30, y2=50, x1=55, x2=65)
-print(image[roi2.get_slices()].shape)           # (20, 10)
+roi2 = roi.recenter((60, 40)).resize(10, 20)  # methods return new ROIs
+print(roi2)  # RoiRectangle(y1=30, y2=50, x1=55, x2=65)
+print(image[roi2.get_slices()].shape)  # (20, 10)
 ```
 
 ## API overview
