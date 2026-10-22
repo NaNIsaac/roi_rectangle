@@ -1,21 +1,12 @@
-.. roi_rectangle documentation master file, created by
-   sphinx-quickstart on Sun Apr 20 16:29:37 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 roi_rectangle documentation
 ===========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+``RoiRectangle(y1, y2, x1, x2)`` is a rectangular region of interest for images and NumPy
+arrays: half-open intervals, optional unbounded sides, and helpers to move, recenter, resize
+and slice an array with it.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: roi_rectangle
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   modules
