@@ -14,6 +14,7 @@
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="roi_rectangle" href="modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -36,11 +37,132 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
-<section id="roi-rectangle-roi-rectangle-module">
-<h2>roi_rectangle.roi_rectangle module<a class="headerlink" href="#roi-rectangle-roi-rectangle-module" title="Link to this heading">¶</a></h2>
+<section id="module-roi_rectangle.roi_rectangle">
+<span id="roi-rectangle-roi-rectangle-module"></span><h2>roi_rectangle.roi_rectangle module<a class="headerlink" href="#module-roi_rectangle.roi_rectangle" title="Link to this heading">¶</a></h2>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<section id="module-roi_rectangle">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-roi_rectangle" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">roi_rectangle.</span></span><span class="sig-name descname"><span class="pre">RoiRectangle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#roi_rectangle.RoiRectangle" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A rectangular region of interest.</p>
+<p>Intervals are half-open: rows [y1, y2) and columns [x1, x2), so y2 and x2
+are not part of the region.</p>
+<dl>
+<dt>Args:</dt><dd><p>y1 (int): First row.
+y2 (int | None): End row (exclusive). None extends the region to the</p>
+<blockquote>
+<div><p>end of the axis.</p>
+</div></blockquote>
+<p>x1 (int): First column.
+x2 (int | None): End column (exclusive). None extends the region to</p>
+<blockquote>
+<div><p>the end of the axis.</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.area">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">area</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.area" title="Link to this definition">¶</a></dt>
+<dd><p>Number of pixels in the ROI, or None if an axis is unbounded.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.center">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">center</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.center" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.from_tuple">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#roi_rectangle.RoiRectangle" title="roi_rectangle.RoiRectangle"><span class="pre">RoiRectangle</span></a></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.from_tuple" title="Link to this definition">¶</a></dt>
+<dd><p>Create an ROI from a (y1, y2, x1, x2) tuple.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.get_slices">
+<span class="sig-name descname"><span class="pre">get_slices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">slice</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">slice</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.get_slices" title="Link to this definition">¶</a></dt>
+<dd><p>Return slices for indexing an image with the ROI.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>tuple: Slices for the y and x axes, in that order.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.height">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">height</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.height" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#roi_rectangle.RoiRectangle" title="roi_rectangle.RoiRectangle"><span class="pre">RoiRectangle</span></a></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.move" title="Link to this definition">¶</a></dt>
+<dd><p>Return a new ROI shifted by (dx, dy).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.recenter">
+<span class="sig-name descname"><span class="pre">recenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#roi_rectangle.RoiRectangle" title="roi_rectangle.RoiRectangle"><span class="pre">RoiRectangle</span></a></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.recenter" title="Link to this definition">¶</a></dt>
+<dd><p>Return a new ROI of the same size centered at new_center (x, y).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.resize">
+<span class="sig-name descname"><span class="pre">resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#roi_rectangle.RoiRectangle" title="roi_rectangle.RoiRectangle"><span class="pre">RoiRectangle</span></a></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.resize" title="Link to this definition">¶</a></dt>
+<dd><p>Return a new ROI of the given size around the same center.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.shape">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">shape</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.shape" title="Link to this definition">¶</a></dt>
+<dd><p>(height, width) of the ROI.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.slice">
+<span class="sig-name descname"><span class="pre">slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NDArray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.slice" title="Link to this definition">¶</a></dt>
+<dd><p>Select the ROI from the last two axes of the image.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>image (np.ndarray): Input image or stack of images.</p>
+</dd>
+<dt>Returns:</dt><dd><p>np.ndarray: A view of the region, not a copy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.to_tuple">
+<span class="sig-name descname"><span class="pre">to_tuple</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.to_tuple" title="Link to this definition">¶</a></dt>
+<dd><p>Return the coordinates as (y1, y2, x1, x2).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.width">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">width</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.width" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.x1">
+<span class="sig-name descname"><span class="pre">x1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.x1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.x2">
+<span class="sig-name descname"><span class="pre">x2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.x2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.y1">
+<span class="sig-name descname"><span class="pre">y1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.y1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="roi_rectangle.RoiRectangle.y2">
+<span class="sig-name descname"><span class="pre">y2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#roi_rectangle.RoiRectangle.y2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
@@ -70,11 +192,21 @@
     </div>
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">roi_rectangle</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">roi_rectangle package</a></li>
+</ul>
+</li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">roi_rectangle</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">roi_rectangle</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
