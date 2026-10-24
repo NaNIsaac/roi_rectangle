@@ -15,8 +15,8 @@ author = "IsaacYong"
 
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.napoleon",  # 구글/넘파이 스타일 docstring 지원
-    "sphinx.ext.viewcode",  # 소스코드 링크 추가
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
 ]
 
 templates_path = ["_templates"]
