@@ -208,5 +208,24 @@ def test_float_coordinates():
         roi.slice(np.zeros((10, 10)))
 
 
+@pytest.mark.parametrize(
+    "roi, dimensions",
+    [
+        (RoiRectangle(1, None, 2, None), (-1, 10)),
+        (RoiRectangle(1, None, 2, None), (10, -1)),
+        (RoiRectangle(1, 10, 2, None), (-1, 10)),
+        (RoiRectangle(1, None, 2, 10), (10, -1)),
+    ],
+)
+def test_resize_rejects_negative_dimensions_even_for_unbounded_axes(roi, dimensions):
+    with pytest.raises(ValueError, match="non-negative"):
+        roi.resize(*dimensions)
+
+
+def test_resize_zero_dimensions_remains_supported():
+    roi = RoiRectangle(0, 10, 0, 10)
+    assert roi.resize(0, 0).shape == (0, 0)
+
+
 if __name__ == "__main__":
     pytest.main()

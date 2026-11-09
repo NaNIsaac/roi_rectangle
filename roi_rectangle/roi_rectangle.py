@@ -71,6 +71,8 @@ class RoiRectangle:
 
     def resize(self, new_width: int, new_height: int) -> RoiRectangle:
         """Return a new ROI of the given size around the same center."""
+        if new_width < 0 or new_height < 0:
+            raise ValueError("new_width and new_height must be non-negative")
         if self.x2 is None and self.y2 is None:
             return self
         cx, cy = self._anchor()
