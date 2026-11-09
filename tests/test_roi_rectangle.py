@@ -208,7 +208,6 @@ def test_float_coordinates():
         roi.slice(np.zeros((10, 10)))
 
 
-
 @pytest.mark.parametrize(
     "roi, dimensions",
     [
