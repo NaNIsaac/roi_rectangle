@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Isaac Yong", email = "isaacyong@naver.com" }]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = ["numpy>=1.21"]
 keywords = ["roi", "region of interest", "rectangle", "image", "numpy", "crop", "slice"]
 classifiers = [
@@ -32,9 +32,7 @@ Changelog = "https://github.com/NaNIsaac/roi_rectangle/blob/main/CHANGELOG.md"
 
 [dependency-groups]
 dev = [
-    "pytest>=7; python_version < '3.10'",
-    # 9.0.3 fixes the tmpdir handling advisory and needs Python 3.10
-    "pytest>=9.0.3; python_version >= '3.10'",
+    "pytest>=9.0.3",
 ]
 
 [tool.uv.build-backend]
